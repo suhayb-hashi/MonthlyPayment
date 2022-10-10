@@ -1,0 +1,34 @@
+# Declare variables for the program
+month_number = 1
+down_payment = .75
+interest_amount = .12
+monthly_payment = .30
+# get the  user input
+puchase_price = float(input('Enter the purchase price: '))
+# validate user input
+while puchase_price <= 0:
+    print('Enter a price greater than 0.00')
+    puchase_price = float(input("Enter the purchase price: "))
+    month = month_number + 1
+# subtracts the down_payment from the puchase_price
+balance = puchase_price - (puchase_price * down_payment)
+payment = balance * monthly_payment  # Calculates the payment
+monthly_interest = interest_amount/12  # Get the monthly interest
+# Displays the table
+print("\n%s%19s%18s%19s%10s%17s" % (
+    "Month", "Starting Balance", "Interest to Pay", "Principal to Pay", "Payment", "Ending Balance"))
+# While loop for balance greater than 0
+while balance > 0:
+    # Calculates if starting balance is less than monthly payment
+    if balance < payment:
+        principal_payment = balance
+        payment = balance
+        interest_payment = 0
+    else:
+        interest_payment = balance * monthly_interest  # Calculates the interst
+        principal_payment = payment - interest_payment  # Calculates the principal
+    end_balance = balance - principal_payment  # Calculates the ending balance
+    print("%2d%16.2f%16.2f%18.2f%18.2f%15.2f" % (
+        month_number, balance, interest_payment, principal_payment, payment, end_balance))  # display the variables on the table
+    balance = end_balance  # add balance to end_balance
+    month_number += 1  # increments the month +1
